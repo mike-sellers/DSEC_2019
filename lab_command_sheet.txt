@@ -1,0 +1,134 @@
+﻿Download and install Git
+Download and install VS Code
+
+
+******************
+Git Configuration
+******************
+git --version
+git config --list --show-origin
+git config --global user.name "Mike Sellers"
+git config --global user.email mike.sellers@jhu.edu
+
+git config --global core.editor "'C:\Program Files (x86)\Notepad++\notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+
+
+******************
+Create Local Repo
+******************
+mkdir C:\git\repos\DSEC_2019
+cd C:\git\repos\DSEC_2019
+git init
+cd .git
+ls
+cd ..
+echo "This is the initial line in File_1.txt" > File_1.txt
+echo "This is the initial line in File_2.txt" > File_2.txt
+echo "This is the initial line in File_3.txt" > File_3.txt
+ls
+git status
+git add .
+git status
+git commit -m "This is the initial commit to the DSEC_2019 local repo"
+git status
+git log
+
+    #SHA1 Info
+    git log | grep HEAD
+    git cat-file commit HEAD
+
+**EDIT FILE 1**
+
+git add .
+git commit -m "Updates to file 1. File modification"
+git log
+
+
+*******************
+Clone Public Repo
+*******************
+cd /c/git/public
+git clone https://github.com/mike-sellers/DSEC_2019.git
+
+
+*******************
+Certificate Authentication Set Env
+*******************
+eval $(ssh-agent -s)
+ssh-add /c/Users/mseller4/.ssh/git_it_jhu_edu.key
+
+
+*******************
+Connect to secure bitbucket @ git.it.jhu.edu remote DSEC_2019
+*******************
+cd /c/git/DSEC_2019
+git remote add origin ssh://git@git.it.jhu.edu:8083/tec/dsec_2019.git
+git push -u origin master
+
+
+*******************
+Clone Remote
+*******************
+cd /c/git
+git clone ssh://git@git.it.jhu.edu:8083/tec/dsec_2019.git
+cd monitoring
+git checkout -b developmentBranch
+git push --set-upstream origin developmentBranch
+
+
+*******************
+Create new branch
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+*******************
+git fetch
+git pull
+git checkout -b development
+git push origin development
+git checkout master
+
+
+*******************
+Delete branch
+https://koukia.ca/delete-a-local-and-a-remote-git-branch-61df0b10d323
+*******************
+git branch -b bad_Branch
+git branch -d bad_Branch
+
+
+*******************
+Merge
+*******************
+git fetch
+git checkout master
+git pull
+git merge origin/development
+git push
+
+Note:  On CONFLICT and following resolution:
+git merge --continue
+
+
+*******************
+Visualizing the tree
+*******************
+cd /c/git/DSEC_2019
+git log --oneline --abbrev-commit --all --graph --decorate
+
+cd /c/git/selfservice
+git log --oneline --abbrev-commit --all --graph --decorate
+
+
+*******************
+GUI Clients
+*******************
+git gui
+navigate fork
+
+https://git.it.jhu.edu PR |OR| Diff
+
+
+*******************
+Web Based PR example
+*******************
+enter pr on bitbucket
+
